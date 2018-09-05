@@ -1,0 +1,35 @@
+// Headings
+h1,
+h2,
+h3 {
+    font-weight: 400;
+
+    &.large-heading {
+        font-size: responsive 2rem 5rem;
+        font-range: 500px 1171px;
+    }
+
+    &.small-heading {
+        font-size: responsive 1rem 3.5rem;
+        font-range: 500px 1171px;
+    }
+}
+
+a {
+    color: $text-color;
+    text-decoration: none;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+}
+
+.text-secondary {
+    color: $secondary-color;
+}
+
+main {
+    padding: 3rem;
+    min-height: calc(100vh - 60px);
+}

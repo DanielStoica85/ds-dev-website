@@ -49,6 +49,21 @@ gulp.task('css', () => {
         .pipe(gulp.dest('./dist/css'));
 });
 
+// Compile Sass without minifying
+gulp.task('watchcss', () => {
+    const processors = [
+        // PostCSS plugins
+        rucksack,
+        autoprefixer({
+            browsers: ['last 4 versions']
+        })
+    ];
+    return gulp.src('./src/sass/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss(processors))
+        .pipe(gulp.dest('./dist/css'));
+});
+
 // Concatenate all scripts - do not run minifyJs if you use this
 gulp.task('concatJs', () => {
     gulp.src('src/js/*.js')
@@ -63,9 +78,9 @@ gulp.task('default', ['copyHtml', 'imageMin', 'css', 'concatJs']);
 // Watch
 gulp.task('watch', () => {
     // enable this if you have multiple scripts
+    gulp.watch('src/*.html', ['copyHtml']);
     gulp.watch('src/js/*.js', ['concatJs']);
     // gulp.watch('src/js/*.js', ['minifyJs']);
-    gulp.watch('src/images/*', ['imageMin']);
-    gulp.watch('src/sass/*.scss', ['css']);
-    gulp.watch('src/*.html', ['copyHtml']);
+    // gulp.watch('src/images/*', ['imageMin']);
+    gulp.watch('src/sass/*.scss', ['watchcss']);
 });
