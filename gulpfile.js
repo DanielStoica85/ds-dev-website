@@ -4,7 +4,8 @@ const gulp = require('gulp');
 
 // Gulp tools
 const imagemin = require('gulp-imagemin');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
+const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 
@@ -31,6 +32,7 @@ gulp.task('imageMin', () => {
 // Minify JS
 gulp.task('minifyJs', () => {
     gulp.src('src/js/*.js')
+        .pipe(rename('main.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'))
 });
@@ -73,14 +75,13 @@ gulp.task('concatJs', () => {
 });
 
 // Run all tasks in one -> build production website
-gulp.task('default', ['copyHtml', 'imageMin', 'css', 'concatJs']);
+gulp.task('default', ['copyHtml', 'imageMin', 'css', 'minifyJs']);
 
 // Watch
 gulp.task('watch', () => {
-    // enable this if you have multiple scripts
     gulp.watch('src/*.html', ['copyHtml']);
-    gulp.watch('src/js/*.js', ['concatJs']);
-    // gulp.watch('src/js/*.js', ['minifyJs']);
+    // gulp.watch('src/js/*.js', ['concatJs']);
+    gulp.watch('src/js/*.js', ['minifyJs']);
     // gulp.watch('src/images/*', ['imageMin']);
     gulp.watch('src/sass/*.scss', ['watchcss']);
 });

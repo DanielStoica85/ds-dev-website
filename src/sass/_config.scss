@@ -1,5 +1,6 @@
 // Variables
 $primary-color: linear-gradient(to right, #141e30, #243b55);
+$primary-color-dark: #141e30;
 $text-color: #ecf0f1;
 $secondary-color: #f1c40f;
 $home-image: url('../images/background-home.jpeg');
@@ -27,5 +28,12 @@ $background-opacity: 0.9;
         z-index: -1;
         background: $primary-color;
         opacity: $background-opacity;
+    }
+}
+
+// Media Query Mixins
+@mixin mediaSmall {
+    @media screen and (max-width: 500px) {
+        @content;
     }
 }
