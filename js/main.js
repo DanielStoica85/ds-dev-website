@@ -1,0 +1,1 @@
+const menuButton=document.querySelector(".menu-button"),menu=document.querySelector(".menu");let showMenu=!1;function toggleMenuDisplay(){showMenu?(menuButton.classList.remove("close"),showMenu=!1):(menuButton.classList.add("close"),showMenu=!0)}menuButton.addEventListener("click",toggleMenuDisplay);
